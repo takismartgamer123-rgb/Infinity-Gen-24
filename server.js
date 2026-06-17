@@ -88,19 +88,27 @@ async function sendMessage(text) {
 
 // ===== 8. معالج الرسائل - كل 16 لعبة =====
 async function handleMessage(item) {
-  const authorId = item.authorDetails.channelId; if (authorId === 'UCxxxxxxxxxxxxxxxx') return;const authorId = item.authorDetails.channelId; if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return;
+  const authorId = item.authorDetails.channelId;
   const rawMsg = item.snippet.displayMessage;
   const msg = rawMsg.toLowerCase();
-    const authorName = item.authorDetails.displayName;
+  const authorName = item.authorDetails.displayName;
   
-  // تجاهل رسائل البوت نفسو باه ما يسبامش
-  if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return; // بدل UCxxx بالايدي تاع تقي الجلاد
+  // 1. تجاهل رسائل البوت نفسه - اهم سطر
+  if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return;
   
+  // 2. زيد النقاط للناس العادية برك
   await addPoints(authorId, authorName, 1);
-  await addPoints(authorId, authorName, 1);
-
+  
   // شخصية تقي
-  if (msg.includes('تقي') && msg.match(/سب|كلب|حمار/)) {
+  if (msg.includes('تقي') && msg.match(/حمار|كلب/)) {
+    await redis.hIncrBy(`user:${authorId}`, 'points', -5);
+    return sendMessage(`يا *** مك يا ${authorName} 🗿`);
+  }
+  
+  // 1. أوامر أساسية
+  if (msg.match(/سلام|مرحبا|اهلا/)) return sendMessage(`وعليكم السلام يا ${authorName} 🗿`);
+  
+  if (msg.match(/نقاط|نقطة|شنطة|شحال|قداه|رصيد/)) {
     await redis.hIncrBy(`user:${authorId}`, 'points', -50);
     return sendMessage(`تقي: ن*** مك يا ${authorName} 🗿 نقصتلك 50 نقطة باممممم`);
   }
