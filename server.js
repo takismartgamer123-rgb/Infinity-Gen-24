@@ -91,10 +91,12 @@ async function handleMessage(item) {
   const authorId = item.authorDetails.channelId; if (authorId === 'UCxxxxxxxxxxxxxxxx') return;const authorId = item.authorDetails.channelId; if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return;
   const rawMsg = item.snippet.displayMessage;
   const msg = rawMsg.toLowerCase();
-  const authorId = item.authorDetails.channelId;
-  const authorName = item.authorDetails.displayName;
-
-  if (authorName === 'INFINITY GEN') return;
+    const authorName = item.authorDetails.displayName;
+  
+  // تجاهل رسائل البوت نفسو باه ما يسبامش
+  if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return; // بدل UCxxx بالايدي تاع تقي الجلاد
+  
+  await addPoints(authorId, authorName, 1);
   await addPoints(authorId, authorName, 1);
 
   // شخصية تقي
