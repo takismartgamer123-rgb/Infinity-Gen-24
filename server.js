@@ -88,6 +88,7 @@ async function sendMessage(text) {
 
 // ===== 8. معالج الرسائل - كل 16 لعبة =====
 async function handleMessage(item) {
+  const authorId = item.authorDetails.channelId; if (authorId === 'UCxxxxxxxxxxxxxxxx') return;const authorId = item.authorDetails.channelId; if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return;
   const rawMsg = item.snippet.displayMessage;
   const msg = rawMsg.toLowerCase();
   const authorId = item.authorDetails.channelId;
