@@ -93,8 +93,8 @@ async function handleMessage(item) {
   const msg = rawMsg.toLowerCase();
   const authorName = item.authorDetails.displayName;
   
-  // 1. تجاهل رسائل البوت نفسه - اهم سطر
-  if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return;
+  // تجاهل رسائل البوت نفسه - بدون ايدي بدون وجع راس
+  if (authorName === 'TAKI_INFINITY_GEN24') return;
   
   // 2. زيد النقاط للناس العادية برك
   await addPoints(authorId, authorName, 1);
