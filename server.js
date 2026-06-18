@@ -94,7 +94,7 @@ async function handleMessage(item) {
   const authorName = item.authorDetails.displayName;
   
   // تجاهل رسائل البوت نفسه - بدون ايدي بدون وجع راس
-  if (authorName === 'TAKI_INFINITY_GEN24') return;
+  if (authorId === 'UCOQtQKhAwESsZW3DVnTxirw') return;
   
   // 2. زيد النقاط للناس العادية برك
   await addPoints(authorId, authorName, 1);
